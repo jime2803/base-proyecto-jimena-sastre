@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import "./styles/components/styles.css"
 import { RouterApp } from './router/RouterApp'
 import "./styles/pages/Home.css"
-
+import "./styles/pages/Dashboard.css"
 
 
 

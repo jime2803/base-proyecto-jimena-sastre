@@ -1,5 +1,5 @@
 import { Layout } from "../components/Layout"
-import "./Dashboard.css"
+import "../styles/pages/Dashboard.css"
 
 const Dashboard = () => {
   return (
@@ -31,4 +31,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard;
+export { Dashboard }
