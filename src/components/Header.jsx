@@ -1,9 +1,9 @@
 const Header = () => {
   return (
     <header className="header">
-      <img src="http://upload.wikimedia.org/wikipedia/commons/8/85/Logo-Test.png" alt="Imagen de Logo" />
-      <nav>
-        <ul>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6r66wSgNLORR5YsgEqjdHTxpbRq7afXJPow&s" alt="Logo" />
+      <nav className="nav">
+        <ul className="nav-list">
           {/* Cambiar elementos a por componentes Link to de react-router-dom. De esta manera el navegador no se refresca y solo cambia de un componente a otro  */}
           <li><a href="/">Inicio</a></li>
           <li><a href="/dashboard">Dashboard</a></li>
