@@ -25,7 +25,7 @@ const Home = () => {
         </ul>
       </section>
       <section>
-        <h2>Nuetsros productos</h2>
+        <h2>Nuestros productos</h2>
         <p>Elegí nuetsras categorías más populares.</p>
 
         {/* {Seccion reservada para carga diferida de productos} */}
