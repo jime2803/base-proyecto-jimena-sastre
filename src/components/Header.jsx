@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <header style={{ background: "lighblue" }}>
+    <header className="header">
       <img src="http://upload.wikimedia.org/wikipedia/commons/8/85/Logo-Test.png" alt="Imagen de Logo" />
       <nav>
         <ul>
