@@ -5,6 +5,7 @@ import { RouterApp } from './router/RouterApp'
 import "./styles/pages/Home.css"
 import "./styles/pages/Dashboard.css"
 import "./styles/pages/NotFound.css"
+import "./styles/pages/Login.css"
 
 
 
