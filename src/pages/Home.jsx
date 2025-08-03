@@ -30,7 +30,7 @@ const Home = () => {
 
         {/* {Seccion reservada para carga diferida de productos} */}
 
-        <div>
+        <div className="product-loading">
           <p>Cargando productos...</p>
         </div>
       </section>
