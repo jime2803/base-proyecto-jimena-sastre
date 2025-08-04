@@ -26,7 +26,7 @@ const Home = () => {
       </section>
       <section>
         <h2>Nuestros productos</h2>
-        <p>Elegí nuetsras categorías más populares.</p>
+        <p>Elegí nuestras categorías más populares.</p>
 
         {/* {Seccion reservada para carga diferida de productos} */}
 

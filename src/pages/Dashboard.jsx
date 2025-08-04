@@ -24,7 +24,7 @@ const Dashboard = () => {
             <textarea id="descripcion" name="descripcion" rows="4" placeholder="Escribí una breve descripción del producto..."></textarea>
           </div>
 
-          <button type="submit" disabled>Guardar producto</button>
+          <button type="submit" id="submit">Guardar producto</button>
         </form>
       </section>
     </Layout>
