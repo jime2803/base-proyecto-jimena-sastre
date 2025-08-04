@@ -3,34 +3,49 @@ import { Layout } from "../components/Layout"
 import "../styles/pages/Dashboard.css"
 
 const Dashboard = () => {
-  const [nombre, setNombre] = useState("")
-  const [precio, setPrecio] = useState("")
-  const [descripcion, setDescripcion] = useState("")
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
+  const [name, setName] = useState("")
+  const [price, setPrice] = useState("")
+  const [description, setDescription] = useState("")
+  const [product, setProduct] = useState(null)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    setError("")
-    setSuccess("")
+    setError(null)
 
     if (!nombre || !precio || !descripcion) {
       setError("Debes completar todos los campos del producto.")
       return
     }
 
-    const newProduct = {
-      nombre,
-      precio,
-      descripcion,
+    if (name.length < 3) {
+      setError("El nombre debe tener al menos 4 caracteres")
+      return
     }
 
-    setSuccess("Producto guardado con éxito.")
-    console.log("Nuevo producto:", newProduct)
+    const newProduct = {
+      id: crypto.randomUUID(),
+      title: name,
+      price: price,
+      description: description,
+      category: "",
+      image: ""
+    }
 
-    setNombre("")
-    setPrecio("")
-    setDescripcion("")
+    // petición al backend mediante fetch -> método POST https://fakeproductapi.com/products
+    const response = await fetch("https://fakestoreapi.com/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newProduct)
+    })
+
+    const data = await response.json()
+    setProduct(data)
+    setName("")
+    setPrice("")
+    setDescription("")
   }
 
   return (
@@ -48,7 +63,7 @@ const Dashboard = () => {
               name="nombre"
               placeholder="Ej: Camiseta algodón"
               onChange={(e) => setNombre(e.target.value)}
-              value={nombre}
+              value={name}
             />
           </div>
 
@@ -60,7 +75,7 @@ const Dashboard = () => {
               name="precio"
               placeholder="Ej: 4999.99"
               onChange={(e) => setPrecio(e.target.value)}
-              value={precio}
+              value={price}
             />
           </div>
 
@@ -72,17 +87,28 @@ const Dashboard = () => {
               rows="4"
               placeholder="Escribí una breve descripción del producto..."
               onChange={(e) => setDescripcion(e.target.value)}
-              value={descripcion}
+              value={description}
             ></textarea>
           </div>
+
+
+          {error && <p className="error-message">{error}</p>}
 
           <button type="submit" id="submit">
             Guardar producto
           </button>
         </form>
 
-        {error && <p className="error-message">{error}</p>}
-        {success && <p className="success-message">{success}</p>}
+
+        {/* {success && <p className="success-message">{success}</p>} */}
+
+        {
+          product && <div>
+            <h3>{product.title}</h3>
+            <p>${product.price}</p>
+            <p>{product.description}</p>
+          </div>
+        }
       </section>
     </Layout>
   )
