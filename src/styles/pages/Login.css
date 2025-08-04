@@ -57,3 +57,17 @@ h2 {
   text-align: center;
   margin-bottom: 20px;
 }
+
+.error-message {
+  color: #ff0000;
+  /* Color rojo para el error */
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.success-message {
+  color: #008000;
+  /* Color verde para el éxito */
+  font-weight: bold;
+  margin-top: 1rem;
+}
