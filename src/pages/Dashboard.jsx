@@ -32,7 +32,7 @@ const Dashboard = () => {
       image: ""
     }
 
-    // petición al backend mediante fetch -> método POST https://fakeproductapi.com/products
+    // petición al backend mediante fetch -> método POST https://fakestoreapi.com/products
     const response = await fetch("https://fakestoreapi.com/products", {
       method: "POST",
       headers: {
@@ -62,7 +62,7 @@ const Dashboard = () => {
               id="nombre"
               name="nombre"
               placeholder="Ej: Camiseta algodón"
-              onChange={(e) => setNombre(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
               value={name}
             />
           </div>
@@ -74,7 +74,7 @@ const Dashboard = () => {
               id="precio"
               name="precio"
               placeholder="Ej: 4999.99"
-              onChange={(e) => setPrecio(e.target.value)}
+              onChange={(e) => setPriceo(e.target.value)}
               value={price}
             />
           </div>
@@ -86,7 +86,7 @@ const Dashboard = () => {
               name="descripcion"
               rows="4"
               placeholder="Escribí una breve descripción del producto..."
-              onChange={(e) => setDescripcion(e.target.value)}
+              onChange={(e) => setDescription(e.target.value)}
               value={description}
             ></textarea>
           </div>

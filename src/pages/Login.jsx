@@ -1,41 +1,56 @@
 import { useState } from "react"
 import { Layout } from "../components/Layout"
 import "../styles/pages/Login.css"
+import { useAuth } from "../context/UserContext"
+import { useNavigate } from "react-router-dom"
+
 
 const Login = () => {
   const [email, setEmail] = useState("")
+  const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState("")
+  const { login } = useAuth()
 
-  const handleSubmit = (e) => {
+  const nagivate = useNavigate()
+
+  const handleLogin = async (e) => {
     e.preventDefault()
+    console.log({ email, username, password })
+    const isLogin = await login(email, username, password)
     setError("")
     setSuccess("")
 
-    if (!email || !password) {
-      setError("Debes completar todos los campos")
-      return
+    if (isLogin) {
+      setEmail("")
+      // setUsername("")
+      setPassword("")
+      nagivate("/")
     }
-
-    const userLogin = {
-      email: email,
-      password: password,
-    }
-
-    setSuccess("Inicio de sesión exitoso")
-    console.log("Datos de inicio de sesión:", userLogin)
-
-    setEmail("")
-    setPassword("")
   }
+
+  if (!email || !password) {
+    setError("Debes completar todos los campos")
+    return
+  }
+
+  const userLogin = {
+    email: email,
+    password: password,
+  }
+
+  setSuccess("Inicio de sesión exitoso")
+  console.log("Datos de inicio de sesión:", userLogin)
+
+  setEmail("")
+  setPassword("")
+
 
   return (
     <Layout>
       <h1>Inicia Sesión</h1>
       <section>
         <h2>Bienvenido</h2>
-        <form className="login-form" onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleLogin}>
           <div className="form-login-group">
             <label htmlFor="email">Correo Electrónico</label>
             <input

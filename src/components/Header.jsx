@@ -1,7 +1,10 @@
 
 import { Link } from "react-router-dom"
+import { useAuth } from "../context/UserContext"
+
 
 const Header = () => {
+  const { user } = useAuth()
   return (
     <header className="header">
       <nav className="nav-bar">
