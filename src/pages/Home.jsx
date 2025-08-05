@@ -172,7 +172,7 @@ const Home = () => {
               <p>{product.description}</p>
               <p><strong>{product.category}</strong></p>
               {
-                user && <div>
+                user && <div className="product-actions">
                   <button onClick={() => handleOpenEdit(product)}>Actualizar</button>
                   <button onClick={() => handleDelete(product.id)}>Borrar</button>
                 </div>

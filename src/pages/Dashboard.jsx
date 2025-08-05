@@ -74,7 +74,7 @@ const Dashboard = () => {
               id="precio"
               name="precio"
               placeholder="Ej: 4999.99"
-              onChange={(e) => setPriceo(e.target.value)}
+              onChange={(e) => setPrice(e.target.value)}
               value={price}
             />
           </div>
@@ -100,7 +100,6 @@ const Dashboard = () => {
         </form>
 
 
-        {/* {success && <p className="success-message">{success}</p>} */}
 
         {
           product && <div>
