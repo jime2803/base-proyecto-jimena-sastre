@@ -6,44 +6,47 @@ import { useNavigate } from "react-router-dom"
 
 
 const Login = () => {
-  const [email, setEmail] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const { login } = useAuth()
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
 
-  const nagivate = useNavigate()
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
   const handleLogin = async (e) => {
     e.preventDefault()
-    console.log({ email, username, password })
-    const isLogin = await login(email, username, password)
-    setError("")
-    setSuccess("")
 
-    if (isLogin) {
-      setEmail("")
-      // setUsername("")
-      setPassword("")
-      nagivate("/")
+    try {
+      setError("")
+      setSuccess("")
+
+      if (!username || !password) {
+        setError("Debes completar todos los campos")
+        return
+      }
+
+      const isLogin = await login(username, password)
+
+      if (isLogin) {
+        const userLogin = {
+          username,
+          password,
+        }
+
+        setSuccess("Inicio de sesión exitoso")
+        console.log("Datos de inicio de sesión:", userLogin)
+        setUsername("")
+        setPassword("")
+        navigate("/")
+      } else {
+        setError("Credenciales incorrectas")
+      }
+    } catch (err) {
+      setError("Ocurrió un error. Inténtalo de nuevo.")
+      console.error(err)
     }
   }
-
-  if (!email || !password) {
-    setError("Debes completar todos los campos")
-    return
-  }
-
-  const userLogin = {
-    email: email,
-    password: password,
-  }
-
-  setSuccess("Inicio de sesión exitoso")
-  console.log("Datos de inicio de sesión:", userLogin)
-
-  setEmail("")
-  setPassword("")
-
 
   return (
     <Layout>
@@ -52,15 +55,15 @@ const Login = () => {
         <h2>Bienvenido</h2>
         <form className="login-form" onSubmit={handleLogin}>
           <div className="form-login-group">
-            <label htmlFor="email">Correo Electrónico</label>
+            <label htmlFor="username">Correo Electrónico</label>
             <input
-              type="email"
-              id="email"
-              name="correo-electronico"
-              placeholder="Ingrese su correo electrónico aquí"
+              type="username"
+              id="username"
+              name="username"
+              placeholder="Ingrese su nombre de usuario"
               className="input-field"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
             />
           </div>
 

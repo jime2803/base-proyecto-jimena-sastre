@@ -13,7 +13,7 @@ const Dashboard = () => {
     e.preventDefault()
     setError(null)
 
-    if (!nombre || !precio || !descripcion) {
+    if (!name || !price || !description) {
       setError("Debes completar todos los campos del producto.")
       return
     }
