@@ -4,6 +4,10 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
+body {
+  padding-top: 80px;
+}
+
 .logo {
   width: 80px;
   height: auto;
@@ -21,6 +25,10 @@
   backdrop-filter: blur(6px);
   padding: 10px 20px;
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
 }
 
 .nav-menu {
