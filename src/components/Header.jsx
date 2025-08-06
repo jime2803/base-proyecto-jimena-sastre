@@ -9,7 +9,15 @@ const Header = () => {
 
   const handleLogout = () => {
     logout()
+    setMenuOpen(false)
     navigate("/login")
+  }
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen)
+  }
+
+  const closeMenu = () => {
+    setMenuOpen(false)
   }
 
   return (
@@ -23,30 +31,36 @@ const Header = () => {
           />
 
           {/* Botón hamburguesa */}
-          <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <button className="hamburger" onClick={toggleMenu}>
             ☰
           </button>
 
-          {user ? (
-            <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
-              <ul className="nav-left">
-                <li><Link to="/">Inicio</Link></li>
-                <li><Link to="/dashboard">Dashboard</Link></li>
-              </ul>
-              <ul className="nav-right">
+          <ul className={`nav-list ${menuOpen ? "active" : ""}`}>
+            {user ? (
+              <>
+                <li>
+                  <Link to="/" onClick={closeMenu}>Inicio</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
+                </li>
                 <li>
                   <button className="logout-button" onClick={handleLogout}>
                     Cerrar sesión
                   </button>
                 </li>
-              </ul>
-            </div>
-          ) : (
-            <ul className={`nav-list ${menuOpen ? "active" : ""}`}>
-              <li><Link to="/login">Iniciar Sesión</Link></li>
-              <li><Link to="/registrate">Registrarse</Link></li>
-            </ul>
-          )}
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login" onClick={closeMenu}>Login</Link>
+                </li>
+                <li>
+                  <Link to="/registrate" onClick={closeMenu}>Registrate</Link>
+                </li>
+              </>
+            )}
+          </ul>
         </div>
       </nav>
     </header>
