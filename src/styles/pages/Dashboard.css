@@ -67,6 +67,7 @@ button[type="submit"] {
   color: #ff0000;
   /* Color rojo para el error */
   font-weight: bold;
+  text-align: center;
   margin-top: 1rem;
 }
 
@@ -74,5 +75,6 @@ button[type="submit"] {
   color: #008000;
   /* Color verde para el éxito */
   font-weight: bold;
+  text-align: center;
   margin-top: 1rem;
 }

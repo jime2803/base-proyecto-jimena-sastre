@@ -8,18 +8,32 @@ const Dashboard = () => {
   const [description, setDescription] = useState("")
   const [product, setProduct] = useState(null)
   const [error, setError] = useState(null)
+  const [image, setImage] = useState(null)
+  const [success, setSuccess] = useState(null)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
+    setSuccess(null)
 
-    if (!name || !price || !description) {
+    if (!name || !price || !description || !image) {
       setError("Debes completar todos los campos del producto.")
       return
     }
 
-    if (name.length < 3) {
+    if (name.length < 4) {
       setError("El nombre debe tener al menos 4 caracteres")
+      return
+    }
+
+    if (isNaN(price)) {
+      setError("Debes ingresar un número válido para el precio.")
+      return
+    }
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/jpg"]
+    if (!allowedTypes.includes(image.type)) {
+      setError("Solo se permiten imágenes JPG o PNG.")
       return
     }
 
@@ -29,7 +43,8 @@ const Dashboard = () => {
       price: price,
       description: description,
       category: "",
-      image: ""
+      image: "",
+      image: URL.createObjectURL(image)
     }
 
     // petición al backend mediante fetch -> método POST https://fakestoreapi.com/products
@@ -43,9 +58,11 @@ const Dashboard = () => {
 
     const data = await response.json()
     setProduct(data)
+    setSuccess("Producto agregado satisfactoriamente.")
     setName("")
     setPrice("")
     setDescription("")
+    setImage(null)
   }
 
   return (
@@ -70,7 +87,7 @@ const Dashboard = () => {
           <div className="form-group">
             <label htmlFor="precio">Precio</label>
             <input
-              type="number"
+              type="text"
               id="precio"
               name="precio"
               placeholder="Ej: 4999.99"
@@ -91,8 +108,20 @@ const Dashboard = () => {
             ></textarea>
           </div>
 
+          <div className="form-group">
+            <label htmlFor="imagen">Imagen del producto</label>
+            <input
+              type="file"
+              id="imagen"
+              name="imagen"
+              accept=".jpg, .jpeg, .png"
+              onChange={(e) => setImage(e.target.files[0])}
+            />
+          </div>
 
           {error && <p className="error-message">{error}</p>}
+          {success && <p className="success-message">{success}</p>}
+
 
           <button type="submit" id="submit">
             Guardar producto
@@ -102,10 +131,12 @@ const Dashboard = () => {
 
 
         {
-          product && <div>
+          product &&
+          <div className="product-preview">
             <h3>{product.title}</h3>
             <p>${product.price}</p>
             <p>{product.description}</p>
+            {product.image && <img src={product.image} alt={product.title} className="preview-img" />}
           </div>
         }
       </section>
