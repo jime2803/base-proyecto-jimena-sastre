@@ -119,7 +119,6 @@ const Home = () => {
         <h2>Nuestros productos</h2>
         <p>Elegí nuestras categorías más populares.</p>
 
-
         {
           showPopup && <section className="popup-edit">
             <h2>Editando producto.</h2>
@@ -158,28 +157,31 @@ const Home = () => {
             </form>
           </section>
         }
-        <div>
-          {/* map es como el forEach que itera cada elemento. siempre que hago un map neceitso una propiedad KEY, qsiempre uso el ID como identificador  */}
 
-          {/* <div className="product-loading">
+        {/* map es como el forEach que itera cada elemento. siempre que hago un map neceitso una propiedad KEY, qsiempre uso el ID como identificador  */}
+
+        {/* <div className="product-loading">
           <p>Cargando productos...</p>
         </div> */}
-          {
-            products.map((product) => <div key={product.id}>
-              <h2 key={product.id}>{product.title}</h2>
-              <img width="80px" src={product.image} alt={`Imagen de ${product.title}`} />
-              <p>${product.price}</p>
+
+        <div className="product-grid">
+          {products.map((product) => (
+            <div className="product-card" key={product.id}>
+              <img src={product.image} alt={`Imagen de ${product.title}`} />
+              <h2>{product.title}</h2>
+              <p className="price">${product.price}</p>
               <p>{product.description}</p>
               <p><strong>{product.category}</strong></p>
-              {
-                user && <div className="product-actions">
-                  <button onClick={() => handleOpenEdit(product)}>Actualizar</button>
+              {user && (
+                <div className="product-actions">
+                  <button onClick={() => handleOpenEdit(product)}>Editar</button>
                   <button onClick={() => handleDelete(product.id)}>Borrar</button>
                 </div>
-              }
-            </div>)
-          }
+              )}
+            </div>
+          ))}
         </div>
+
 
       </section>
     </Layout>
