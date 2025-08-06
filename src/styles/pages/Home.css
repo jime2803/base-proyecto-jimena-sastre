@@ -67,6 +67,8 @@ section ul li p {
   color: #555;
 }
 
+
+
 /* Carga de productos */
 section .product-loading {
   display: flex;
@@ -76,6 +78,18 @@ section .product-loading {
   font-style: italic;
   color: #777;
 }
+
+.product-search {
+  width: 100%;
+  max-width: 400px;
+  margin: 1rem auto 2rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  display: block;
+}
+
 
 /*Popup */
 .popup-edit {

@@ -1,9 +1,11 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/UserContext"
+import { useState } from "react"
 
 const Header = () => {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const handleLogout = () => {
     logout()
@@ -20,8 +22,13 @@ const Header = () => {
             className="logo"
           />
 
+          {/* Botón hamburguesa */}
+          <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+            ☰
+          </button>
+
           {user ? (
-            <div className="nav-menu">
+            <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
               <ul className="nav-left">
                 <li><Link to="/">Inicio</Link></li>
                 <li><Link to="/dashboard">Dashboard</Link></li>
@@ -35,7 +42,7 @@ const Header = () => {
               </ul>
             </div>
           ) : (
-            <ul className="nav-list">
+            <ul className={`nav-list ${menuOpen ? "active" : ""}`}>
               <li><Link to="/login">Iniciar Sesión</Link></li>
               <li><Link to="/registrate">Registrarse</Link></li>
             </ul>

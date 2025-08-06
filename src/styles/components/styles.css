@@ -121,3 +121,55 @@ button[type="submit"] {
 @media (max-width: 480px) {}
 
 @media (max-width: 880px) {}
+
+/* Botón hamburguesa */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Ocultar menú en mobile por defecto */
+.nav-menu,
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Mobile */
+@media (max-width: 880px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu,
+  .nav-list {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(30, 30, 47, 0.95);
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+  }
+
+  .nav-menu.active,
+  .nav-list.active {
+    display: flex;
+    /* Mostrar cuando está activo */
+  }
+
+  .nav-left,
+  .nav-right {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}

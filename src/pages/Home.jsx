@@ -13,6 +13,7 @@ const Home = () => {
   const [descriptionEdit, setDescriptionEdit] = useState("")
   const [categoryEdit, setCategoryEdit] = useState("")
   const [imageEdit, setImageEdit] = useState("")
+  const [searchTerm, setSearchTerm] = useState("")
 
 
   // simulando existencia del usuario, proximamente este estado será global
@@ -92,8 +93,16 @@ const Home = () => {
     }
   }
 
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
   return (
     <Layout>
+      <section>
+        <h1>Bienvenido a Nuestra Tienda Virtual</h1>
+        <p>Descubrí una sección exclusiva de productos para vos. Calidad, confianza y atención personalizada.</p>
+      </section>
       <section>
         <h2>¿Por qué elegirnos?</h2>
         <ul>
@@ -115,6 +124,14 @@ const Home = () => {
       <section>
         <h2>Nuestros productos</h2>
         <p>Elegí nuestras categorías más populares.</p>
+
+        <input
+          type="text"
+          placeholder="Buscar productos..."
+          className="product-search"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
         {
           showPopup && <section className="popup-edit">
@@ -162,24 +179,26 @@ const Home = () => {
         </div> */}
 
         <div className="product-grid">
-          {products.map((product) => (
-            <div className="product-card" key={product.id}>
-              <img src={product.image} alt={`Imagen de ${product.title}`} />
-              <h2>{product.title}</h2>
-              <p className="price">${product.price}</p>
-              <p>{product.description}</p>
-              <p><strong>{product.category}</strong></p>
-              {user && (
-                <div className="product-actions">
-                  <button onClick={() => handleOpenEdit(product)}>Editar</button>
-                  <button onClick={() => handleDelete(product.id)}>Borrar</button>
-                </div>
-              )}
-            </div>
-          ))}
+          {filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <div className="product-card" key={product.id}>
+                <img src={product.image} alt={`Imagen de ${product.title}`} />
+                <h2>{product.title}</h2>
+                <p className="price">${product.price}</p>
+                <p>{product.description}</p>
+                <p><strong>{product.category}</strong></p>
+                {user && (
+                  <div className="product-actions">
+                    <button onClick={() => handleOpenEdit(product)}>Actualizar</button>
+                    <button onClick={() => handleDelete(product.id)}>Borrar</button>
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="product-loading">No se encontraron productos.</p>
+          )}
         </div>
-
-
       </section>
     </Layout>
   )
