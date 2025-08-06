@@ -7,7 +7,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout()
-    navigate("/login") // Redirige al login después de cerrar sesión
+    navigate("/login")
   }
 
   return (
@@ -19,24 +19,27 @@ const Header = () => {
             alt="Logo"
             className="logo"
           />
-          <ul className="nav-list">
-            {user ? (
-              <>
-                <li><Link to="/">Home</Link></li>
+
+          {user ? (
+            <div className="nav-menu">
+              <ul className="nav-left">
+                <li><Link to="/">Inicio</Link></li>
                 <li><Link to="/dashboard">Dashboard</Link></li>
+              </ul>
+              <ul className="nav-right">
                 <li>
                   <button className="logout-button" onClick={handleLogout}>
                     Cerrar sesión
                   </button>
                 </li>
-              </>
-            ) : (
-              <>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/registrate">Registrate</Link></li>
-              </>
-            )}
-          </ul>
+              </ul>
+            </div>
+          ) : (
+            <ul className="nav-list">
+              <li><Link to="/login">Iniciar Sesión</Link></li>
+              <li><Link to="/registrate">Registrarse</Link></li>
+            </ul>
+          )}
         </div>
       </nav>
     </header>

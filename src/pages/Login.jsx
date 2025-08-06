@@ -53,7 +53,11 @@ const Login = () => {
       <h1>Inicia Sesión</h1>
       <section>
         <h2>Bienvenido</h2>
-        <p>mor_2314, 83r5^_</p>
+        <p><b>Credenciales de prueba:</b>
+          <br />
+          <b>Usuario:</b> mor_2314,
+          <br />
+          <b>Contraseña:</b> 83r5^_</p>
         <form className="login-form" onSubmit={handleLogin}>
           <div className="form-login-group">
             <label htmlFor="username">Nombre de Usuario</label>
