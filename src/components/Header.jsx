@@ -12,40 +12,40 @@ const Header = () => {
     setMenuOpen(false)
     navigate("/login")
   }
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen)
-  }
 
-  const closeMenu = () => {
-    setMenuOpen(false)
-  }
+  const toggleMenu = () => setMenuOpen(!menuOpen)
+  const closeMenu = () => setMenuOpen(false)
 
   return (
     <header className="header">
       <nav className="nav-bar">
         <div className="nav-content">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlMB8QIUMDZGt49epmEkVmaXzfLiraPRfMJA&s"
-            alt="Logo"
-            className="logo"
-          />
+          {/* Logo -> Home */}
+          <Link to="/" onClick={closeMenu} className="logo-link">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlMB8QIUMDZGt49epmEkVmaXzfLiraPRfMJA&s"
+              alt="Logo"
+              className="logo"
+            />
+          </Link>
 
-          {/* Botón hamburguesa */}
-          <button className="hamburger" onClick={toggleMenu}>
+          {/* Botón hamburguesa (mobile) */}
+          <button className="hamburger" onClick={toggleMenu} aria-label="Abrir menú">
             ☰
           </button>
 
           <ul className={`nav-list ${menuOpen ? "active" : ""}`}>
+            <li>
+              <Link to="/" onClick={closeMenu}>Inicio</Link>
+            </li>
+            <li>
+              <Link to="/sobre-nosotros" onClick={closeMenu}>Sobre Nosotros</Link>
+            </li>
+
             {user ? (
               <>
                 <li>
-                  <Link to="/" onClick={closeMenu}>Inicio</Link>
-                </li>
-                <li>
                   <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
-                </li>
-                <li>
-                  <Link to="/sobre-nosotros">Sobre Nosotros</Link>
                 </li>
                 <li>
                   <button className="logout-button" onClick={handleLogout}>
@@ -56,7 +56,7 @@ const Header = () => {
             ) : (
               <>
                 <li>
-                  <Link to="/login" onClick={closeMenu}>Login</Link>
+                  <Link to="/login" onClick={closeMenu}>Iniciar Sesión</Link>
                 </li>
                 <li>
                   <Link to="/registrate" onClick={closeMenu}>Registrate</Link>

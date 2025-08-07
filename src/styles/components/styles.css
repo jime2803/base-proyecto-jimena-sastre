@@ -80,7 +80,7 @@ body {
   color: white;
   font-weight: bold;
   transition: color 0.3s;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 .nav-list li a:hover {
