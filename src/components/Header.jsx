@@ -47,7 +47,6 @@ const Header = () => {
                 <li>
                   <Link to="/sobre-nosotros">Sobre Nosotros</Link>
                 </li>
-
                 <li>
                   <button className="logout-button" onClick={handleLogout}>
                     Cerrar sesión

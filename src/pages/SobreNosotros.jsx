@@ -38,9 +38,59 @@ const SobreNosotros = () => {
           </div>
         </div>
 
-        <section className="caracteristicas">
+        <section className="caracteristicas-grid">
           <h2>Características Técnicas</h2>
-          <p>Este proyecto incluye diseño adaptativo, estructura modular y uso de buenas prácticas en frontend.</p>
+          <div className="grid-cards">
+            <div className="grid-card">
+              <h3>🔐 Autenticación y Seguridad</h3>
+              <ul>
+                <li>Sistema de login/logout con Context API.</li>
+                <li>Rutas protegidas con PrivateRoute</li>
+                <li>Validación de formularios en tiempo real</li>
+                <li>Manejo de errores y feedback al usuario</li>
+              </ul>
+            </div>
+
+            <div className="grid-card">
+              <h3>📱 Diseño Responsive</h3>
+              <ul>
+                <li>Mobile-first design (hasta 480px)</li>
+                <li>Optimización para tabletas (hasta 880px)</li>
+                <li>Experiencia desktop (881px+)</li>
+                <li>Sistema de grid adaptable</li>
+              </ul>
+            </div>
+
+            <div className="grid-card">
+              <h3>🔍 Funcionalidades Avanzadas</h3>
+              <ul>
+                <li>Búsqueda de productos en tiempo real</li>
+                <li>CRUD completo de productos</li>
+                <li>Modal popup para edición</li>
+                <li>Loading states y manejo de errores</li>
+              </ul>
+            </div>
+
+            <div className="grid-card">
+              <h3>🎨 Experiencia de Usuario</h3>
+              <ul>
+                <li>Interfaz intuitiva y moderna</li>
+                <li>Animaciones y transiciones suaves</li>
+                <li>Mensajes de feedback claros</li>
+                <li>Navegación fluida entre páginas</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section className="cta-final">
+          <h2>¿Tenés alguna pregunta?</h2>
+          <p>
+            Este proyecto fue desarrollado como parte del aprendizaje de React y las tecnologías modernas de desarrollo web.
+            Si tenés alguna consulta o sugerencia, no dudes en contactarnos.
+          </p>
+          <a href="https://github.com/jime2803" target="_blank" rel="noopener noreferrer" className="btn-cta">
+            Ver más proyectos
+          </a>
         </section>
       </section>
     </Layout>
