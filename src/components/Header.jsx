@@ -45,6 +45,10 @@ const Header = () => {
                   <Link to="/dashboard" onClick={closeMenu}>Dashboard</Link>
                 </li>
                 <li>
+                  <Link to="/sobre-nosotros">Sobre Nosotros</Link>
+                </li>
+
+                <li>
                   <button className="logout-button" onClick={handleLogout}>
                     Cerrar sesión
                   </button>
