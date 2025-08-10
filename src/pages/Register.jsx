@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Layout } from "../components/Layout"
-import { use } from "react"
+import { useAuth } from "../context/UserContext"
 
 const Register = () => {
 
@@ -9,38 +9,51 @@ const Register = () => {
   const [username, setUsername] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [phone, setPhone] = useState("")
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const { register } = useAuth()
 
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
     setSuccess("")
+    setLoading(true)
 
     /*validacion: para evitar que se envien formularios vacios sin input tengo que agregar un condicional para validar, las dos || se leen "o" y el signo de exclamacion invierte el valor booleano, en este caso seria: "si No hay username, o no hay emal o no hay password, debe retornar..." para completar la validacion, creamos el estado  setError y dentro del condicional lo referenciamos para que arroje un cartel en un parrafo al final y luego para vaciar el parrafo del error, debo validarlo antes de enviar el formulario con el handle submit arriba*/
 
     if (!username || !email || !password) {
       setError("Debes completar todos los campos")
+      setLoading(false)
       return
     }
 
 
 
-    /* objeto*/
-    const newUSer = {
-      username: username,
-      email: email,
-      password: password,
+    const { ok, error: apiError } = await register({
+      username, email, password, firstName, lastName, phone
+    })
+
+    // /* objeto*/
+    // const newUSer = {
+    //   username: username,
+    //   email: email,
+    //   password: password,
+    // }
+
+    if (ok) {
+      setSuccess("Usuario registrado con éxito")
+      /* este es el caso/la validacion de exito*/
+      setUsername(""); setEmail(""); setPassword(""); setFirstName(""); setLastName(""); setPhone("")
+    } else {
+      setError(apiError || "Fallo el registro")
     }
-
-    setSuccess("Usuario registrado con éxito")
-    /* este es el caso/la validacion de exito*/
-
-    setUsername("")
-    setEmail("")
-    setPassword("")
+    setLoading(false)
 
     /*limpia el valor de los estados*/
   }
@@ -56,7 +69,7 @@ const Register = () => {
         <form className="register-form" onSubmit={handleSubmit} >
 
           <div className="form-register-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Usuario</label>
             <input
               type="text"
               id="username"
@@ -95,17 +108,47 @@ const Register = () => {
             />
           </div>
 
-          <button type="submit" className="button-submit">
+          <div className="form-register-group">
+            <label htmlFor="firstName">Nombre</label>
+            <input
+              type="text"
+              id="firstName"
+              className="input-field"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+
+          <div className="form-register-group">
+            <label htmlFor="lastName">Apellido</label>
+            <input
+              id="lastName"
+              type="text"
+              className="input-field"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+
+          <div className="form-register-group">
+            <label htmlFor="phone">Teléfono</label>
+            <input
+              id="phone"
+              type="tel"
+              className="input-field"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+
+          <button type="submit" className="button-submit" disabled={loading}>
             Ingresar
           </button>
         </form>
 
-        {error && <p id="error">Debes completar todos los campos</p>
-        }
+        {error && <p id="error">Debes completar todos los campos</p>}
 
-        {
-          success && <p id="success">{success}</p>
-        }
+        {success && <p id="success">{success}</p>}
 
       </section>
     </Layout >
