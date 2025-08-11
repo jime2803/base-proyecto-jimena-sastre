@@ -66,7 +66,7 @@ const UserProvider = (props) => {
       }
 
       const data = await res.json()
-      setUser(true) // simular sesión iniciada
+      setUser(true)
       return { ok: true, data }
     } catch (err) {
       console.error("register() error:", err)
@@ -74,13 +74,12 @@ const UserProvider = (props) => {
     }
   }
 
-
   const logout = () => {
     setUser(null)
   }
 
   return (
-    <UserContext.Provider value={{ login, logout, user }}>
+    <UserContext.Provider value={{ login, register, logout, user }}>
       {props.children}
     </UserContext.Provider>
   )
