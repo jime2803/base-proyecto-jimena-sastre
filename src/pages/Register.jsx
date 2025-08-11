@@ -1,6 +1,9 @@
 import { useState } from "react"
 import { Layout } from "../components/Layout"
 import { useAuth } from "../context/UserContext"
+import { useNavigate } from "react-router-dom"
+import { Layout } from "../components/Layout"
+import "../styles/pages/Register.css"
 
 const Register = () => {
 
@@ -17,7 +20,13 @@ const Register = () => {
   const [loading, setLoading] = useState(false)
 
   const { register } = useAuth()
+  const navigate = useNavigate()
 
+  useEffect(() => {
+    if (!success) return
+    const t = setTimeout(() => navigate("/"), 1200)
+    return () => clearTimeout(t)
+  }, [success, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -33,9 +42,7 @@ const Register = () => {
       return
     }
 
-
-
-    const { ok, error: apiError } = await register({
+    const { ok, error: appiError } = await register({
       username, email, password, firstName, lastName, phone
     })
 
@@ -49,9 +56,11 @@ const Register = () => {
     if (ok) {
       setSuccess("Usuario registrado con éxito")
       /* este es el caso/la validacion de exito*/
-      setUsername(""); setEmail(""); setPassword(""); setFirstName(""); setLastName(""); setPhone("")
+      setUsername(""); setEmail(""); setPassword("")
+      setFirstName(""); setLastName(""); setPhone("")
+      // setTimeout(() => navigate("/"), 1200)
     } else {
-      setError(apiError || "Fallo el registro")
+      setError(appiError || "Fallo el registro")
     }
     setLoading(false)
 
@@ -77,7 +86,7 @@ const Register = () => {
               placeholder="Ingrese su nombre de usuario"
               className="input-field"
               /*funcion para que guarde los cambios en el input*/
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)} disabled={loadin}
               value={username} /*cuando se limpien los estados, de esta forma tambien se va a limpiar el valor del formulario al darle el mismo valor que le puse en el objeto de username, es decir, "username", de igual manera hago con el email y el password*/
             />
           </div>
@@ -90,7 +99,7 @@ const Register = () => {
               name="correo-electronico"
               placeholder="Ingrese su correo electrónico aquí"
               className="input-field"
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)} disabled={loading}
               value={email}
             />
           </div>
@@ -103,7 +112,7 @@ const Register = () => {
               name="password"
               placeholder="Contraseña"
               className="input-field"
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)} disabled={loading}
               value={password}
             />
           </div>
@@ -115,7 +124,7 @@ const Register = () => {
               id="firstName"
               className="input-field"
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              onChange={(e) => setFirstName(e.target.value)} disabled={loading}
             />
           </div>
 
@@ -126,7 +135,7 @@ const Register = () => {
               type="text"
               className="input-field"
               value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              onChange={(e) => setLastName(e.target.value)} disabled={loading}
             />
           </div>
 
@@ -137,7 +146,7 @@ const Register = () => {
               type="tel"
               className="input-field"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)} disabled={loading}
             />
           </div>
 
