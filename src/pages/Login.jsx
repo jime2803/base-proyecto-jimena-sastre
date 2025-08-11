@@ -26,6 +26,11 @@ const Login = () => {
         return
       }
 
+      if (password.length < 6) {
+        setError("La contraseña debe tener al menos 6 caracteres")
+        return
+      }
+
       const isLogin = await login(username, password)
 
       if (isLogin) {

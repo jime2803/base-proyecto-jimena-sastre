@@ -31,6 +31,16 @@ const Dashboard = () => {
       return
     }
 
+    if (Number(price) <= 0) {
+      setError("El precio debe ser mayor a 0")
+      return
+    }
+
+    if (description.trim().length < 10) {
+      setError("La descripción debe tener al menos 10 caracteres")
+      return
+    }
+
     const allowedTypes = ["image/jpeg", "image/png", "image/jpg"]
     if (!allowedTypes.includes(image.type)) {
       setError("Solo se permiten imágenes JPG o PNG.")

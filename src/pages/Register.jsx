@@ -36,7 +36,20 @@ const Register = () => {
     /*validacion: para evitar que se envien formularios vacios sin input tengo que agregar un condicional para validar, las dos || se leen "o" y el signo de exclamacion invierte el valor booleano, en este caso seria: "si No hay username, o no hay emal o no hay password, debe retornar..." para completar la validacion, creamos el estado  setError y dentro del condicional lo referenciamos para que arroje un cartel en un parrafo al final y luego para vaciar el parrafo del error, debo validarlo antes de enviar el formulario con el handle submit arriba*/
 
     if (!username || !email || !password) {
-      setError("Debes completar todos los campos")
+      setError("Debes completar usuario, email y contraseña")
+      setLoading(false)
+      return
+    }
+
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    if (!emailOk) {
+      setError("Formato de email inválido")
+      setLoading(false)
+      return
+    }
+
+    if (password.length < 6) {
+      setError("La contraseña debe tener al menos 6 caracteres")
       setLoading(false)
       return
     }
@@ -154,7 +167,7 @@ const Register = () => {
           </button>
         </form>
 
-        {error && <p id="error">Debes completar todos los campos</p>}
+        {error && <p id="error">{error}</p>}
 
         {success && <p id="success">{success}</p>}
 
