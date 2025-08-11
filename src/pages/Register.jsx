@@ -1,8 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Layout } from "../components/Layout"
 import { useAuth } from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
-import { Layout } from "../components/Layout"
 import "../styles/pages/Register.css"
 
 const Register = () => {
@@ -42,7 +41,7 @@ const Register = () => {
       return
     }
 
-    const { ok, error: appiError } = await register({
+    const { ok, error: apiError } = await register({
       username, email, password, firstName, lastName, phone
     })
 
@@ -60,7 +59,7 @@ const Register = () => {
       setFirstName(""); setLastName(""); setPhone("")
       // setTimeout(() => navigate("/"), 1200)
     } else {
-      setError(appiError || "Fallo el registro")
+      setError(apiError || "Fallo el registro")
     }
     setLoading(false)
 
@@ -86,7 +85,7 @@ const Register = () => {
               placeholder="Ingrese su nombre de usuario"
               className="input-field"
               /*funcion para que guarde los cambios en el input*/
-              onChange={(e) => setUsername(e.target.value)} disabled={loadin}
+              onChange={(e) => setUsername(e.target.value)} disabled={loading}
               value={username} /*cuando se limpien los estados, de esta forma tambien se va a limpiar el valor del formulario al darle el mismo valor que le puse en el objeto de username, es decir, "username", de igual manera hago con el email y el password*/
             />
           </div>
